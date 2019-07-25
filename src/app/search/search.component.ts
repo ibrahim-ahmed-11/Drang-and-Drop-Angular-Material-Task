@@ -10,8 +10,8 @@ import { DragulaService } from 'ng2-dragula';
 })
 export class SearchComponent implements OnInit {
 
-  private notFound: boolean;
-  private isEmpty: boolean;
+  notFound: boolean;
+  isEmpty: boolean;
   resultSet: any;
   inputString: string;
 
