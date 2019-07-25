@@ -1,6 +1,6 @@
 import { GetFromAPIService } from './../services/get-from-api.service';
 import { Component, OnInit } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { DragulaService } from 'ng2-dragula';
 
 
 @Component({
@@ -15,14 +15,19 @@ export class SearchComponent implements OnInit {
   resultSet: any;
   inputString: string;
 
-  constructor(private service: GetFromAPIService) { }
+
+  public constructor(private dragulaService: DragulaService, private service: GetFromAPIService) {
+    dragulaService.createGroup("resultsFromServer", {
+      removeOnSpill: false
+    });
+  }
 
   ngOnInit() {
     this.notFound = false;
     this.isEmpty = false;
   }
 
-  getResult() {
+  getResult() { 
 
     if (this.inputString) {
 
@@ -42,10 +47,6 @@ export class SearchComponent implements OnInit {
     }
     else
       this.isEmpty = true;
-  }
-
-  drop(event: CdkDragDrop<any[]>) {
-    moveItemInArray(this.resultSet, event.previousIndex, event.currentIndex);
   }
 
 }

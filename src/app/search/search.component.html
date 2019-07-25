@@ -1,42 +1,70 @@
-<div class="text-center p-2 m-3 col-12">
+<div class="text-center mt-3 col-12">
 
-    <mat-form-field class="my-width col-12" hintLabel="ex. people/1">
-        <span matPrefix>https://swapi.co/api/&nbsp;</span>
-        <input matInput placeholder="Place string here" [(ngModel)]="inputString" (keyup)="getResult()">
+    <h2 class="d-inline mat-h4 mat-subheading-1 mr-1">https://swapi.co/api/</h2>
+    <mat-form-field class="my-width col-12ml-0 pl-0" hintLabel="ex. people/1" appearance="outline">
+        <mat-label>Place string here</mat-label>
+        <input matInput [(ngModel)]="inputString" (keyup)="getResult()" (keypress.enter)="getResult()">
     </mat-form-field>
 
 </div>
+
+<div class="text-center mb-3 col-12">
+    <button mat-raised-button color="primary" (click)="getResult()">Search</button>
+</div>
+
 
 <mat-card *ngIf="notFound && !isEmpty" class="alert alert-danger">
     Item not found !!
 </mat-card>
 
 
-<div *ngIf="!notFound && !isEmpty" class="row" id="resultArea" cdkDropList (cdkDropListDropped)="drop($event)">
-    <div *ngFor="let item of resultSet" class="p-2 col-12 col-sm-12 col-md-4 col-lg-3" cdkDrag [cdkDragData]="item">
+
+<div *ngIf="!notFound && !isEmpty" class="row" id="resultArea" dragula="resultsFromServer" [(dragulaModel)]="resultSet">
+    <div *ngFor="let item of resultSet" class="p-1 col-12 ">
         <mat-card class="m-1">
-            <mat-card-title class="alert alert-success text-center"> {{item.name}} </mat-card-title>
-            <mat-chip-list>
-                <mat-chip color="primary" selected>Gender : {{item.gender}}</mat-chip>
-            </mat-chip-list>
 
-            <mat-card-content class="mt-2">
+            <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title class="col-8">
+                            <mat-card-title class="text-center">
+                                {{item.name}}
+                            </mat-card-title>
+                        </mat-panel-title>
 
-                <mat-list>
-                    <mat-list-item class="card-text pl-3">
-                        URL : <a [href]="item.url" target="_blank">{{item.name}}</a>
-                    </mat-list-item>
-                    <mat-divider></mat-divider>
-                    <mat-list-item class="card-text pl-3">
-                        Height : {{item.height}} cm
-                    </mat-list-item>
-                    <mat-divider></mat-divider>
-                    <mat-list-item class="card-text pl-3">
-                        <a [href]="item.homeworld" target="_blank">Homeworld</a>
-                    </mat-list-item>
-                </mat-list>
+                        <mat-panel-description class="col-4">
+                            <mat-chip-list>
+                                <mat-chip color="primary" selected>Gender : {{item.gender}}</mat-chip>
+                            </mat-chip-list>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
 
-            </mat-card-content>
+                    <mat-card-content class="mt-2">
+
+                        <mat-list>
+                            <mat-list-item class="card-text pl-3">
+                                URL : <a [href]="item.url" target="_blank">{{item.name}}</a>
+                            </mat-list-item>
+
+                            <mat-divider [inset]="true"></mat-divider>
+
+                            <mat-list-item class="card-text pl-3">
+                                Height : {{item.height}} cm
+                            </mat-list-item>
+
+                            <mat-divider [inset]="true"></mat-divider>
+
+                            <mat-list-item class="card-text pl-3">
+                                <a [href]="item.homeworld" target="_blank">Homeworld</a>
+                            </mat-list-item>
+                        </mat-list>
+
+                    </mat-card-content>
+                </mat-expansion-panel>
+            </mat-accordion>
+
+
+
         </mat-card>
     </div>
 
