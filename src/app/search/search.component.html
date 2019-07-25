@@ -1,7 +1,7 @@
 <div class="text-center mt-3 mb-3 col-12">
 
     <h2 class="d-inline mat-h4 mat-subheading-1 mr-1">https://swapi.co/api/</h2>
-    <mat-form-field class="my-width col-12ml-0 pl-0" hintLabel="ex. people/1" appearance="outline">
+    <mat-form-field class="my-width col-12ml-0 pl-0" hintLabel="Need a hint? try people/1/" appearance="outline">
         <mat-label>Place string here</mat-label>
         <input matInput [(ngModel)]="inputString" (keyup)="getResult()" (keypress.enter)="getResult()">
     </mat-form-field>
