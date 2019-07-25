@@ -1,4 +1,4 @@
-<div class="text-center mt-3 col-12">
+<div class="text-center mt-3 mb-3 col-12">
 
     <h2 class="d-inline mat-h4 mat-subheading-1 mr-1">https://swapi.co/api/</h2>
     <mat-form-field class="my-width col-12ml-0 pl-0" hintLabel="ex. people/1" appearance="outline">
@@ -6,10 +6,6 @@
         <input matInput [(ngModel)]="inputString" (keyup)="getResult()" (keypress.enter)="getResult()">
     </mat-form-field>
 
-</div>
-
-<div class="text-center mb-3 col-12">
-    <button mat-raised-button color="primary" (click)="getResult()">Search</button>
 </div>
 
 
@@ -20,52 +16,39 @@
 
 
 <div *ngIf="!notFound && !isEmpty" class="row" id="resultArea" dragula="resultsFromServer" [(dragulaModel)]="resultSet">
-    <div *ngFor="let item of resultSet" class="p-1 col-12 ">
+    <div *ngFor="let item of resultSet" class="p-1 col-4 ">
+
         <mat-card class="m-1">
-
-            <mat-accordion>
-                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title class="col-8">
-                            <mat-card-title class="text-center">
-                                {{item.name}}
-                            </mat-card-title>
-                        </mat-panel-title>
-
-                        <mat-panel-description class="col-4">
-                            <mat-chip-list>
-                                <mat-chip color="primary" selected>Gender : {{item.gender}}</mat-chip>
-                            </mat-chip-list>
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
-
-                    <mat-card-content class="mt-2">
-
-                        <mat-list>
-                            <mat-list-item class="card-text pl-3">
-                                URL : <a [href]="item.url" target="_blank">{{item.name}}</a>
-                            </mat-list-item>
-
-                            <mat-divider [inset]="true"></mat-divider>
-
-                            <mat-list-item class="card-text pl-3">
-                                Height : {{item.height}} cm
-                            </mat-list-item>
-
-                            <mat-divider [inset]="true"></mat-divider>
-
-                            <mat-list-item class="card-text pl-3">
-                                <a [href]="item.homeworld" target="_blank">Homeworld</a>
-                            </mat-list-item>
-                        </mat-list>
-
-                    </mat-card-content>
-                </mat-expansion-panel>
-            </mat-accordion>
+            <mat-card-header>
+                <div mat-card-avatar *ngIf="item.gender === 'male'" class="male-header-image"></div>
+                <div mat-card-avatar *ngIf="item.gender === 'female'" class="female-header-image"></div>
+                <div mat-card-avatar *ngIf="item.gender !== 'male' && item.gender !=='female'" class="unknown-header-image"></div>
 
 
+                <mat-card-title>{{item.name}}</mat-card-title>
+                <mat-card-subtitle>{{item.gender}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-list>
+                    <mat-list-item class="card-text pl-3">
+                        URL :&nbsp; <a [href]="item.url" target="_blank"> {{item.name}}</a>
+                    </mat-list-item>
 
+                    <mat-divider [inset]="true"></mat-divider>
+
+                    <mat-list-item class="card-text pl-3">
+                        Height : {{item.height}} cm
+                    </mat-list-item>
+
+                    <mat-divider [inset]="true"></mat-divider>
+
+                    <mat-list-item class="card-text pl-3">
+                        <a [href]="item.homeworld" target="_blank">Homeworld</a>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
         </mat-card>
+
     </div>
 
 </div>

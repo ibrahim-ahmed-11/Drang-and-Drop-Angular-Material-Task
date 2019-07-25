@@ -1,7 +1,18 @@
-.my-width{
+.my-width {
     width: 50%;
 }
 
-.full-height{
-    height: 100%;
+.male-header-image {
+    background-image: url('../../assets/male.jpg');
+    background-size: cover;
+}
+
+.female-header-image {
+    background-image: url('../../assets/female.jpg');
+    background-size: cover;
+}
+
+.unknown-header-image {
+    background-image: url('../../assets/unknown.jpg');
+    background-size: cover;
 }
