@@ -41,6 +41,8 @@ Or run `ng serve --open` and the browser will open automatically
 - Deploy the project using `firebase deploy`
 - Link to the live version of the project will appear
 
+## Accessing the Documentation 
+Run the `compodoc -o` command in the CLI 
 
 ## Code scaffolding
 
